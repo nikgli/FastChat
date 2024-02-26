@@ -1,5 +1,5 @@
-# Note on this Fork
-:warning: This fork has only been tested with the openAI api feature
+# Note
+:warning: This fork has only been tested and used with the openAI api
 
 # FastChat
 | [**Demo**](https://chat.lmsys.org/) | [**Discord**](https://discord.gg/HSWAKCrnFx) | [**X**](https://x.com/lmsysorg) |
