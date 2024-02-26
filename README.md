@@ -1,3 +1,6 @@
+# Note on this Fork
+:warning: This fork has only been tested with the openAI api feature
+
 # FastChat
 | [**Demo**](https://chat.lmsys.org/) | [**Discord**](https://discord.gg/HSWAKCrnFx) | [**X**](https://x.com/lmsysorg) |
 
