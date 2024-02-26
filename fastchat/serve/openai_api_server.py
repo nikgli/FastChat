@@ -596,6 +596,8 @@ async def create_completion(request: CompletionRequest):
         choices = []
         usage = UsageInfo()
         for i, content in enumerate(all_tasks):
+            if isinstance(content, str):
+                content = json.loads(content)
             if content["error_code"] != 0:
                 return create_error_response(content["error_code"], content["text"])
             choices.append(

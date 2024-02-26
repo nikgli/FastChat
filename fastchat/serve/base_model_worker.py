@@ -11,6 +11,14 @@ from fastchat.constants import WORKER_HEART_BEAT_INTERVAL
 from fastchat.conversation import Conversation
 from fastchat.utils import pretty_print_semaphore, build_logger
 
+import contextvars
+import functools
+
+async def to_thread(func, /, *args, **kwargs):
+    loop = asyncio.get_running_loop()
+    ctx = contextvars.copy_context()
+    func_call = functools.partial(ctx.run, func, *args, **kwargs)
+    return await loop.run_in_executor(None, func_call)
 
 worker = None
 logger = None
@@ -203,7 +211,7 @@ async def api_generate_stream(request: Request):
 async def api_generate(request: Request):
     params = await request.json()
     await acquire_worker_semaphore()
-    output = await asyncio.to_thread(worker.generate_gate, params)
+    output = await to_thread(worker.generate_gate, params)
     release_worker_semaphore()
     return JSONResponse(output)
 
